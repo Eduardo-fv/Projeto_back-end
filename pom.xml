@@ -8,7 +8,7 @@
 		<version>3.1.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>edu.univille.</groupId>
+	<groupId>edu.univille</groupId>
 	<artifactId>deliveryapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>deliveryapi</name>
@@ -31,6 +31,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.33</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
