@@ -12,3 +12,17 @@ Nesse dia, o foco principal foi na implementação da classe `Client` no projeto
 - `phone` (String): Número de telefone do cliente.
 
 Essa classe foi adicionada no arquivo `src/main/java/edu/univille/deliveryapi/domain/model/Client.java`.
+
+## 21/10/2023 - Implementação do CRUD para a Entidade Cliente
+
+No dia 21/10/2023, foram adicionadas funcionalidades CRUD para a entidade `Client` no projeto Delivery API. Abaixo estão os detalhes das mudanças realizadas:
+
+### `ClientController`
+
+A classe `ClientController` foi atualizada para incluir endpoints para operações CRUD (Create, Read, Update, Delete) relacionadas aos clientes. Os seguintes endpoints foram adicionados:
+
+- `POST /clients`: Cria um novo cliente.
+- `DELETE /clients/{id}`: Exclui um cliente pelo seu ID.
+- `GET /clients`: Retorna a lista de todos os clientes.
+- `GET /clients/{id}`: Retorna um cliente específico pelo seu ID.
+
