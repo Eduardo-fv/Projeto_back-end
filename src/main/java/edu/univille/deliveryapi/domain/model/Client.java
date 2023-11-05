@@ -2,6 +2,7 @@ package edu.univille.deliveryapi.domain.model;
 
 import java.util.Objects;
 
+import edu.univille.deliveryapi.domain.ValidationGroups;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,12 +10,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.groups.ConvertGroup;
+import jakarta.validation.groups.Default;
 
 @Entity
 @Table(name = "tb_client")
 public class Client {
 	
+	@NotNull(groups = ValidationGroups.ClientId.class)
+	@ConvertGroup(from = Default.class, to = ValidationGroups.ClientId.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

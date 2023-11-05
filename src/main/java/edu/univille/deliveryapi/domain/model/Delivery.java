@@ -2,7 +2,11 @@ package edu.univille.deliveryapi.domain.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -13,6 +17,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_delivery")
@@ -21,16 +27,25 @@ public class Delivery {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Valid
+	@NotNull
 	@ManyToOne
 	private Client client;
+	
 	@Embedded
 	private Receiver receiver;
+	
+	@NotNull
+	private BigDecimal tax;
+	
 	@Enumerated(EnumType.STRING)
 	private DeliveryStatus status;
 	
-	private BigDecimal tax;
-	private LocalDateTime orderDate;
-	private LocalDateTime finalizationDate;
+	@JsonProperty(access = Access.READ_ONLY)
+	private OffsetDateTime orderDate;
+	@JsonProperty(access = Access.READ_ONLY)
+	private OffsetDateTime finalizationDate;
 	
 	public Long getId() 
 	{ return id; }
@@ -40,9 +55,9 @@ public class Delivery {
 	{ return receiver; }
 	public BigDecimal getTax() 
 	{ return tax; }
-	public LocalDateTime getOrderDate()
+	public OffsetDateTime getOrderDate()
 	{ return orderDate; }
-	public LocalDateTime getFinalizationDate()
+	public OffsetDateTime getFinalizationDate()
 	{ return finalizationDate; }
 	public DeliveryStatus getStatus() 
 	{ return status; }
@@ -55,15 +70,10 @@ public class Delivery {
 	{ this.tax = tax; }
 	public void setStatus(DeliveryStatus status) 
 	{ this.status = status; }
-	public void setOrderDate(LocalDateTime orderDate) 
+	public void setOrderDate(OffsetDateTime orderDate) 
 	{ this.orderDate = orderDate; }
-	public void setFinalizationDate(LocalDateTime finalizationDate) 
+	public void setFinalizationDate(OffsetDateTime finalizationDate) 
 	{ this.finalizationDate = finalizationDate; }
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -75,6 +85,15 @@ public class Delivery {
 			return false;
 		Delivery other = (Delivery) obj;
 		return Objects.equals(id, other.id);
+	}
+	
+	public void finalize() throws Exception {
+		if (!DeliveryStatus.PENDING.equals(getStatus())) {
+			throw new Exception("Delivery cannot be finished.");
+		} else {
+			setStatus(DeliveryStatus.FINISHED);
+			setFinalizationDate(OffsetDateTime.now());
+		}
 	}
 	
 }

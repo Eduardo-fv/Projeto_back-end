@@ -36,6 +36,7 @@ public class ClientService {
 	
 	public Client findById(Long id) {
 		Optional<Client> client = clientRepository.findById(id);
+		
 		return client.orElseThrow(() -> new ObjectNotFoundException("Object not found, Id: " 
 		+ id + ", Type: " + Client.class.getName(), client));
 	}
