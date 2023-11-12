@@ -33,7 +33,7 @@ public class DeliveryServiceTest {
     private ClientRepository clientRepository;
 
     @Test
-    public void testRequestDelivery() {
+    public void shouldRequestDelivery() {
         Delivery delivery = new Delivery();
         Client client = new Client();
         client.setId(1L);
@@ -49,7 +49,7 @@ public class DeliveryServiceTest {
     }
 
     @Test
-    public void testFinalizeDelivery() throws Exception {
+    public void shouldFinalizeDelivery() throws Exception {
         Delivery delivery = new Delivery();
         delivery.setStatus(DeliveryStatus.PENDING);
 

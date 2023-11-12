@@ -31,7 +31,7 @@ public class ClientServiceTest {
     }
 
     @Test
-    public void testFindById() {
+    public void shouldFindById() {
         Client client = new Client();
         client.setName("Test");
         client.setEmail("test@test.com");

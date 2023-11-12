@@ -25,6 +25,7 @@ import jakarta.validation.constraints.NotNull;
 public class Delivery {
 	
 	@Id
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
