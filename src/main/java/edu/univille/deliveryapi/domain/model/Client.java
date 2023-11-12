@@ -47,6 +47,8 @@ public class Client {
 	public String getPhone() 
 	{ return phone; }
 	
+	public void setId(Long id)
+	{ this.id = id; }
 	public void setName(String name) 
 	{ this.name = name; }
 	public void setEmail(String email) 

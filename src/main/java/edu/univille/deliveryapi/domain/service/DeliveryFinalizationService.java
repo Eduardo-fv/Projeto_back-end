@@ -18,9 +18,9 @@ public class DeliveryFinalizationService {
 	private DeliveryRepository deliveryRepository;
 	
 	@Transactional
-	public void finalize (Long deliveryId) {
-		Delivery delivery = deliveryRepository.findById(deliveryId);		
-		delivery.finalize();
+	public void finalizeDelivery (Long deliveryId) throws Exception {
+		Delivery delivery = deliveryRepository.getById(deliveryId);		
+		delivery.finalizeDelivery();
 		
 		deliveryRepository.save(delivery);
 	}

@@ -1,6 +1,7 @@
 package edu.univille.deliveryapi.domain.service;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class DeliveryRequestService {
 		Client client = clientRepository.getById(delivery.getClient().getId());
 		
 		delivery.setStatus(DeliveryStatus.PENDING);
-		delivery.setOrderDate(LocalDateTime.now());
+		delivery.setOrderDate(OffsetDateTime.now());
 		
 		return deliveryRepository.save(delivery);
 	}

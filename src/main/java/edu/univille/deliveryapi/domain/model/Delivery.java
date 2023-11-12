@@ -87,7 +87,7 @@ public class Delivery {
 		return Objects.equals(id, other.id);
 	}
 	
-	public void finalize() throws Exception {
+	public void finalizeDelivery() throws Exception {
 		if (!DeliveryStatus.PENDING.equals(getStatus())) {
 			throw new Exception("Delivery cannot be finished.");
 		} else {
