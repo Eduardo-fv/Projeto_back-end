@@ -90,5 +90,30 @@ Um novo serviço chamado `DeliveryFinalizationService` foi criado para gerenciar
 A interface `DeliveryRepository` foi modificada para incluir um método adicional:
 - `findById(Long id)`: Este método permite buscar uma entrega pelo seu ID. Ele retorna um objeto `Optional<Delivery>`, o que significa que pode ou não haver uma entrega com o ID fornecido.
 
+# Atualização 12/11/2023
+
+algumas modificações significativas foram realizadas no projeto Delivery API. Aqui estão os detalhes das alterações:
+
+### Atualização de Dependências no arquivo `pom.xml`
+O arquivo `pom.xml` foi atualizado para incluir novas versões de dependências:
+
+### Modificações em `ClientController`
+Na classe `ClientController`, foram feitas as seguintes alterações:
+- Adicionado novo endpoint `PUT /clients/{id}`: Este endpoint permite a atualização de informações de um cliente existente com base no seu ID.
+
+### Modificações em `Client`
+Na classe `Client`, foi adicionado um método setter para o atributo `id`.
+
+### Modificações em `Delivery`
+Na classe `Delivery`, o método `finalize` foi renomeado para `finalizeDelivery`. Além disso, os atributos `orderDate` e `finalizationDate` foram alterados para usar `OffsetDateTime` em vez de `LocalDateTime`.
+
+### Adição de Serviço `DeliveryFinalizationService`
+Foi adicionado um novo serviço chamado `DeliveryFinalizationService` para gerenciar a finalização das entregas. Este serviço inclui o método `finalizeDelivery(Long deliveryId)`.
+
+### Modificações em `DeliveryRequestService`
+Na classe `DeliveryRequestService`, o método `requestDelivery` foi ajustado para definir a data do pedido usando `OffsetDateTime` em vez de `LocalDateTime`.
+
+### Testes Unitários
+Foram adicionados testes unitários para as classes `ClientService` e `DeliveryService` usando a biblioteca JUnit 5 e o framework Mockito.
 
 
