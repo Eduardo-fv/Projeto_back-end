@@ -67,4 +67,17 @@ public class DeliveryController {
 		}
 	}
 
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteDelivery(@PathVariable Long id) {
+		Optional<Delivery> existingDeliveryOptional = deliveryRepository.findById(id);
+
+		if (existingDeliveryOptional.isPresent()) {
+			deliveryRepository.deleteById(id);
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+
 }
