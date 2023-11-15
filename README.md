@@ -81,7 +81,7 @@ Nesta atualização, foram realizadas modificações importantes no projeto Deli
 
 ### `DeliveryController`
 A classe `DeliveryController` foi atualizada para incluir um novo endpoint:
-- `PUT /deliveries/{id}/finalize`: Este endpoint permite finalizar uma entrega específica com base no seu ID. Ao chamar este endpoint, a entrega é marcada como finalizada e a data e hora de finalização são registradas.
+- `PUT /deliveries/{id}/finalizated`: Este endpoint permite finalizar uma entrega específica com base no seu ID. Ao chamar este endpoint, a entrega é marcada como finalizada e a data e hora de finalização são registradas.
 
 ### `DeliveryFinalizationService`
 Um novo serviço chamado `DeliveryFinalizationService` foi criado para gerenciar a finalização das entregas. Ele inclui o método `finalize(Long deliveryId)` para marcar uma entrega como finalizada. Ao chamar este método, a entrega é finalizada e a data e hora de finalização são registradas.
