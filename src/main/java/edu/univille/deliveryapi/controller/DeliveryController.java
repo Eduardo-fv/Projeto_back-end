@@ -47,4 +47,24 @@ public class DeliveryController {
         Optional<Delivery> delivery = deliveryRepository.findById(id);
         return delivery.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Delivery> updateDelivery(@PathVariable Long id, @RequestBody Delivery updatedDelivery) {
+		Optional<Delivery> existingDeliveryOptional = deliveryRepository.findById(id);
+
+		if (existingDeliveryOptional.isPresent()) {
+			Delivery existingDelivery = existingDeliveryOptional.get();
+
+			// Atualiza os campos necessários
+			existingDelivery.setTax(updatedDelivery.getTax());
+
+			// Salva a entrega atualizada
+			Delivery savedDelivery = deliveryRepository.save(existingDelivery);
+
+			return ResponseEntity.ok(savedDelivery);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 }
