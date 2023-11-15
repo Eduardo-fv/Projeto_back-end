@@ -31,10 +31,11 @@ public class DeliveryController {
     }
 
     @PutMapping("/{id}/finalizated")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void finalize(@PathVariable Long deliveryId) throws Exception {
-        deliveryFinalizationService.finalizeDelivery(deliveryId);
-    }
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void finalize(@PathVariable("id") Long deliveryId) throws Exception {
+		deliveryFinalizationService.finalizeDelivery(deliveryId);
+	}
+
 
     @GetMapping
     public ResponseEntity<List<Delivery>> getAllDeliveries() {
