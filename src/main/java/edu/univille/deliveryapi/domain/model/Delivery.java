@@ -1,7 +1,6 @@
 package edu.univille.deliveryapi.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 

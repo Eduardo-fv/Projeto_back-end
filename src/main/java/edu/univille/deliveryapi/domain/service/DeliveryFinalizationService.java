@@ -1,13 +1,9 @@
 package edu.univille.deliveryapi.domain.service;
 
-import java.util.Optional;
-
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.univille.deliveryapi.domain.model.Client;
 import edu.univille.deliveryapi.domain.model.Delivery;
 import edu.univille.deliveryapi.repository.DeliveryRepository;
 
