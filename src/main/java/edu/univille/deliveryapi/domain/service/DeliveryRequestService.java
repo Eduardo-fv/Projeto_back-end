@@ -5,8 +5,6 @@ import java.time.OffsetDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import edu.univille.deliveryapi.domain.model.Client;
 import edu.univille.deliveryapi.domain.model.Delivery;
 import edu.univille.deliveryapi.domain.model.DeliveryStatus;
 import edu.univille.deliveryapi.repository.ClientRepository;
@@ -22,7 +20,8 @@ public class DeliveryRequestService {
 	
 	@Transactional
 	public Delivery requestDelivery (Delivery delivery) {
-		Client client = clientRepository.getById(delivery.getClient().getId());
+		clientRepository.findById(delivery.getClient().getId()).orElse(null);
+
 		
 		delivery.setStatus(DeliveryStatus.PENDING);
 		delivery.setOrderDate(OffsetDateTime.now());
