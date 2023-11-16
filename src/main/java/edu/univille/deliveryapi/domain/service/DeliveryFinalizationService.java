@@ -14,11 +14,12 @@ public class DeliveryFinalizationService {
 	private DeliveryRepository deliveryRepository;
 	
 	@Transactional
-	public void finalizeDelivery (Long deliveryId) throws Exception {
-		Delivery delivery = deliveryRepository.getById(deliveryId);		
-		delivery.finalizeDelivery();
+	public void finalizeDelivery(Long deliveryId) {
+		// Utilize o método findById e verifique se a entrega existe
+		Delivery delivery = deliveryRepository.findById(deliveryId)
+				.orElseThrow(() -> new IllegalArgumentException("Entrega não encontrada com o ID: " + deliveryId));
 		
+		delivery.finalizeDelivery();
 		deliveryRepository.save(delivery);
 	}
-
 }

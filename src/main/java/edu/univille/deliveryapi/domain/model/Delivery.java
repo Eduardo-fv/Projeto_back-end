@@ -44,34 +44,46 @@ public class Delivery {
 	
 	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime orderDate;
+	
 	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime finalizationDate;
 	
 	public Long getId() 
 	{ return id; }
+	
 	public Client getClient() 
 	{ return client; }
+	
 	public Receiver getReceiver() 
 	{ return receiver; }
+	
 	public BigDecimal getTax() 
 	{ return tax; }
+	
 	public OffsetDateTime getOrderDate()
 	{ return orderDate; }
+	
 	public OffsetDateTime getFinalizationDate()
 	{ return finalizationDate; }
+	
 	public DeliveryStatus getStatus() 
 	{ return status; }
 	
 	public void setClient(Client client) 
 	{ this.client = client; }
+	
 	public void setReceiver(Receiver receiver) 
 	{ this.receiver = receiver; }
+	
 	public void setTax(BigDecimal tax) 
 	{ this.tax = tax; }
+	
 	public void setStatus(DeliveryStatus status) 
 	{ this.status = status; }
+	
 	public void setOrderDate(OffsetDateTime orderDate) 
 	{ this.orderDate = orderDate; }
+	
 	public void setFinalizationDate(OffsetDateTime finalizationDate) 
 	{ this.finalizationDate = finalizationDate; }
 	
@@ -87,13 +99,12 @@ public class Delivery {
 		return Objects.equals(id, other.id);
 	}
 	
-	public void finalizeDelivery() throws Exception {
+	public void finalizeDelivery() {
 		if (!DeliveryStatus.PENDING.equals(getStatus())) {
-			throw new Exception("Delivery cannot be finished.");
+			throw new IllegalStateException("Delivery cannot be finished.");
 		} else {
 			setStatus(DeliveryStatus.FINISHED);
 			setFinalizationDate(OffsetDateTime.now());
 		}
 	}
-	
 }
