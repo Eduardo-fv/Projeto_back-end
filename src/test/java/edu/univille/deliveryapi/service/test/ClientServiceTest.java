@@ -18,7 +18,7 @@ import edu.univille.deliveryapi.domain.service.ClientService;
 import edu.univille.deliveryapi.repository.ClientRepository;
 
 public class ClientServiceTest {
-	
+    
     @InjectMocks
     private ClientService clientService;
 
@@ -26,8 +26,9 @@ public class ClientServiceTest {
     private ClientRepository clientRepository;
 
     @BeforeEach
-    public void init() {
-        MockitoAnnotations.initMocks(this);
+    public void setUp() {
+        // Inicializar os mocks usando MockitoAnnotations (evitar o uso de método deprecated)
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
