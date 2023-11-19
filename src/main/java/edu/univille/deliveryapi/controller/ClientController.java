@@ -22,39 +22,47 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping(value = "/clients")
 public class ClientController {
-	
-	@Autowired
-	private ClientService clientService;
-	
-	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public Client insertClient (@Valid @RequestBody Client client) {
-		return clientService.save(client);
-	}
-	
-	@DeleteMapping(value = "/{id}")
-	public void deleteClientById (@PathVariable Long id) throws Exception {
-		clientService.delete(id);
-	}
-	
-	@GetMapping
-	public ResponseEntity<List<Client>> listClient () {
-		List<Client> clients = clientService.findAll();
-		
-		return ResponseEntity.ok(clients);
-	}
-	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Client> findClientById (@PathVariable Long id) {
-		Client client = clientService.findById(id);
-		
-		return ResponseEntity.ok(client);
-	}
-	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Client> update (@PathVariable Long id, @RequestBody Client client) {
-		clientService.update(id, client);
-		return ResponseEntity.ok().body(client);
-	}
-
+    
+    // Injeção de dependência do serviço de clientes
+    @Autowired
+    private ClientService clientService;
+    
+    // Endpoint para inserir um novo cliente
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Client insertClient(@Valid @RequestBody Client client) {
+        return clientService.save(client);
+    }
+    
+    // Endpoint para deletar um cliente pelo ID
+    @DeleteMapping(value = "/{id}")
+    public void deleteClientById(@PathVariable Long id) throws Exception {
+        clientService.delete(id);
+    }
+    
+    // Endpoint para listar todos os clientes
+    @GetMapping
+    public ResponseEntity<List<Client>> listClient() {
+        List<Client> clients = clientService.findAll();
+        
+        // Retorna uma resposta com a lista de clientes e status OK (200)
+        return ResponseEntity.ok(clients);
+    }
+    
+    // Endpoint para encontrar um cliente pelo ID
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Client> findClientById(@PathVariable Long id) {
+        Client client = clientService.findById(id);
+        
+        // Retorna uma resposta com o cliente encontrado e status OK (200)
+        return ResponseEntity.ok(client);
+    }
+    
+    // Endpoint para atualizar um cliente pelo ID
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client) {
+        clientService.update(id, client);
+        // Retorna uma resposta com o cliente atualizado e status OK (200)
+        return ResponseEntity.ok().body(client);
+    }
 }

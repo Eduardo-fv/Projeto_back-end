@@ -13,40 +13,52 @@ import edu.univille.deliveryapi.repository.ClientRepository;
 
 @Service
 public class ClientService {
-	
-	@Autowired
-	private ClientRepository clientRepository;
-	
-	@Transactional
-	public Client save (Client client) {
-		return clientRepository.save(client);
-	}
-	
-	@Transactional
-	public void delete (Long id) throws Exception{
-		if (!clientRepository.existsById(id)) {
-			throw new Exception("Client not found!");
-		}
-		clientRepository.deleteById(id);
-	}
-	
-	public List<Client> findAll() {
-		return clientRepository.findAll();
-	}
-	
-	public Client findById(Long id) {
-		Optional<Client> client = clientRepository.findById(id);
-		
-		return client.orElseThrow(() -> new ObjectNotFoundException("Object not found, Id: " 
+    
+    // Injeção de dependência do repositório de clientes
+    @Autowired
+    private ClientRepository clientRepository;
+    
+    // Método para salvar um cliente
+    @Transactional
+    public Client save(Client client) {
+        return clientRepository.save(client);
+    }
+    
+    // Método para excluir um cliente pelo ID
+    @Transactional
+    public void delete(Long id) throws Exception {
+        // Verifica se o cliente existe antes de tentar excluí-lo
+        if (!clientRepository.existsById(id)) {
+            throw new Exception("Cliente não encontrado!");
+        }
+        clientRepository.deleteById(id);
+    }
+    
+    // Método para listar todos os clientes
+    public List<Client> findAll() {
+        return clientRepository.findAll();
+    }
+    
+    // Método para encontrar um cliente pelo ID
+    public Client findById(Long id) {
+        Optional<Client> client = clientRepository.findById(id);
+        
+        // Lança uma exceção se o cliente não for encontrado
+        return client.orElseThrow(() -> new ObjectNotFoundException("Object not found, Id: " 
 		+ id + ", Type: " + Client.class.getName(), client));
-	}
-	
-	public Client update (Long id, Client client) {
-		Client newClient = findById(id);
-		newClient.setName(client.getName());
-		newClient.setEmail(client.getEmail());
-		newClient.setPhone(client.getPhone());
-		return clientRepository.save(newClient);
-	}
-
+    }
+    
+    // Método para atualizar as informações de um cliente
+    public Client update(Long id, Client client) {
+        // Encontra o cliente pelo ID
+        Client newClient = findById(id);
+        
+        // Atualiza as informações do cliente
+        newClient.setName(client.getName());
+        newClient.setEmail(client.getEmail());
+        newClient.setPhone(client.getPhone());
+        
+        // Salva o cliente atualizado no repositório
+        return clientRepository.save(newClient);
+    }
 }

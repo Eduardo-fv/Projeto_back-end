@@ -17,6 +17,7 @@ import edu.univille.deliveryapi.repository.DeliveryRepository;
 @RequestMapping(value = "/deliveries")
 public class DeliveryController {
 
+    // Injeção de dependências dos serviços e repositório necessários
     @Autowired
     private DeliveryRequestService deliveryRequestService;
     @Autowired
@@ -24,61 +25,64 @@ public class DeliveryController {
     @Autowired
     private DeliveryRepository deliveryRepository;
 
+    // Endpoint para solicitar uma nova entrega
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Delivery requestDelivery(@RequestBody Delivery delivery) {
         return deliveryRequestService.requestDelivery(delivery);
     }
 
+    // Endpoint para finalizar uma entrega pelo ID
     @PutMapping("/{id}/finalizated")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void finalize(@PathVariable("id") Long deliveryId) throws Exception {
-		deliveryFinalizationService.finalizeDelivery(deliveryId);
-	}
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finalize(@PathVariable("id") Long deliveryId) throws Exception {
+        deliveryFinalizationService.finalizeDelivery(deliveryId);
+    }
 
-
+    // Endpoint para obter todas as entregas
     @GetMapping
     public ResponseEntity<List<Delivery>> getAllDeliveries() {
         List<Delivery> list = deliveryRepository.findAll();
         return ResponseEntity.ok(list);
     }
 
+    // Endpoint para obter uma entrega pelo ID
     @GetMapping("/{id}")
     public ResponseEntity<Delivery> getDeliveryById(@PathVariable Long id) {
         Optional<Delivery> delivery = deliveryRepository.findById(id);
         return delivery.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Delivery> updateDelivery(@PathVariable Long id, @RequestBody Delivery updatedDelivery) {
-		Optional<Delivery> existingDeliveryOptional = deliveryRepository.findById(id);
+    // Endpoint para atualizar uma entrega pelo ID
+    @PutMapping("/{id}")
+    public ResponseEntity<Delivery> updateDelivery(@PathVariable Long id, @RequestBody Delivery updatedDelivery) {
+        Optional<Delivery> existingDeliveryOptional = deliveryRepository.findById(id);
 
-		if (existingDeliveryOptional.isPresent()) {
-			Delivery existingDelivery = existingDeliveryOptional.get();
+        if (existingDeliveryOptional.isPresent()) {
+            Delivery existingDelivery = existingDeliveryOptional.get();
 
-			// Atualiza os campos necessários
-			existingDelivery.setTax(updatedDelivery.getTax());
+            // Atualiza os campos necessários
+            existingDelivery.setTax(updatedDelivery.getTax());
 
-			// Salva a entrega atualizada
-			Delivery savedDelivery = deliveryRepository.save(existingDelivery);
+            // Salva a entrega atualizada
+            Delivery savedDelivery = deliveryRepository.save(existingDelivery);
 
-			return ResponseEntity.ok(savedDelivery);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
-	}
+            return ResponseEntity.ok(savedDelivery);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteDelivery(@PathVariable Long id) {
-		Optional<Delivery> existingDeliveryOptional = deliveryRepository.findById(id);
+    // Endpoint para excluir uma entrega pelo ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDelivery(@PathVariable Long id) {
+        Optional<Delivery> existingDeliveryOptional = deliveryRepository.findById(id);
 
-		if (existingDeliveryOptional.isPresent()) {
-			deliveryRepository.deleteById(id);
-			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
-		}
-	}
-
-
+        if (existingDeliveryOptional.isPresent()) {
+            deliveryRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

@@ -9,17 +9,22 @@ import edu.univille.deliveryapi.repository.DeliveryRepository;
 
 @Service
 public class DeliveryFinalizationService {
-	
-	@Autowired
-	private DeliveryRepository deliveryRepository;
-	
-	@Transactional
-	public void finalizeDelivery(Long deliveryId) {
-		// Utilize o método findById e verifique se a entrega existe
-		Delivery delivery = deliveryRepository.findById(deliveryId)
-				.orElseThrow(() -> new IllegalArgumentException("Entrega não encontrada com o ID: " + deliveryId));
-		
-		delivery.finalizeDelivery();
-		deliveryRepository.save(delivery);
-	}
+    
+    // Injeção de dependência do repositório de entregas
+    @Autowired
+    private DeliveryRepository deliveryRepository;
+    
+    // Método para finalizar uma entrega pelo ID
+    @Transactional
+    public void finalizeDelivery(Long deliveryId) {
+        // Utiliza o método findById para encontrar a entrega pelo ID
+        Delivery delivery = deliveryRepository.findById(deliveryId)
+                .orElseThrow(() -> new IllegalArgumentException("Entrega não encontrada com o ID: " + deliveryId));
+        
+        // Chama o método finalizeDelivery da classe Delivery para realizar a finalização
+        delivery.finalizeDelivery();
+        
+        // Salva a entrega atualizada no repositório
+        deliveryRepository.save(delivery);
+    }
 }
