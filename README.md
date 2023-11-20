@@ -116,4 +116,33 @@ Na classe `DeliveryRequestService`, o método `requestDelivery` foi ajustado par
 ### Testes Unitários
 Foram adicionados testes unitários para as classes `ClientService` e `DeliveryService` usando a biblioteca JUnit 5 e o framework Mockito.
 
+# Atualização 15/11/2023
+
+No dia 15/11/2023, o desenvolvedor realizou as seguintes ações no projeto:
+
+1. **Refatoração de Serviço:**
+   - Substituição e simplificação do serviço.
+
+2. **Limpeza de Imports:**
+   - Remoção de imports desnecessários nos arquivos do projeto.
+
+3. **Atualização da Documentação:**
+   - Atualização da documentação da rota 'PUT /deliveries/{id}/finalize' para 'PUT /deliveries/{id}/finalizated'.
+   - Adição do `deliveryId` ao `@PathVariable` para possibilitar a atualização do status do pedido.
+
+4. **Adição de Novas Rotas:**
+   - Adição do método `@DeleteMapping(/{id})` para criar uma rota de deleção.
+   - Adição do método `@PutMapping(/{id})` para tratar a atualização das entregas.
+
+# Atualização 19/11/2023
+
+1. **Adição de Comentários nos Códigos**
+   - Foram adicionados comentários aos códigos dos arquivos, aprimorando a documentação e a compreensão do código-fonte.
+
+2. **Remoção de Arquivos **
+   - Ouve a remoção de alguns arquivos do commit. 
+
+
+
+
 
