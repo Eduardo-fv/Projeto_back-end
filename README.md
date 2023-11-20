@@ -139,7 +139,7 @@ No dia 15/11/2023, o desenvolvedor realizou as seguintes ações no projeto:
 1. **Adição de Comentários nos Códigos**
    - Foram adicionados comentários aos códigos dos arquivos, aprimorando a documentação e a compreensão do código-fonte.
 
-2. **Remoção de Arquivos **
+2. **Remoção de Arquivos**
    - Ouve a remoção de alguns arquivos do commit. 
 
 
