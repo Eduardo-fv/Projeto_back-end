@@ -142,6 +142,10 @@ No dia 15/11/2023, o desenvolvedor realizou as seguintes ações no projeto:
 2. **Remoção de Arquivos**
    - Ouve a remoção de alguns arquivos do commit. 
 
+# Atualização 23/11/2023
+
+**Adição de Teste Unitário:**
+O Desenvolvedor Rafael adicionou mais um teste unitário para o método requestDelivery na classe DeliveryRequestService, deste modo verificando se o método funciona corretamente.
 
 
 
